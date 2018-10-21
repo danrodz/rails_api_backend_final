@@ -9,6 +9,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
 gem 'active_model_serializers'
 gem 'jwt', '~> 2.1'
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   gem 'sqlite3'
