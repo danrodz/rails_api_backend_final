@@ -2,7 +2,6 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :image_url, :jwt
 
   def image_url
-    debugger
     instance_options[:get_image_url].call(@object.image)
   end
 
