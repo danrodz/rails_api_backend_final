@@ -1,6 +1,28 @@
 class ApplicationController < ActionController::API
   before_action :authorized
 
+  def get_image_url
+    @cb = ->(image) do
+      begin
+        url_for(image)
+      rescue Module::DelegationError
+        ''
+      end
+    end
+    @cb
+  end
+
+  def get_token
+    @cb = ->(id) do
+      begin
+        encode_token({ user_id: id })
+      rescue Module::DelegationError
+        ''
+      end
+    end
+    @cb
+  end
+
   def encode_token(payload)
     JWT.encode(payload, 'my_s3cr3t')
   end

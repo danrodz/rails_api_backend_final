@@ -4,8 +4,9 @@ class Api::V1::AuthController < ApplicationController
   def create
     @user = User.find_by(username: user_login_params[:username])
     if @user && @user.authenticate(user_login_params[:password])
-      token = encode_token({ user_id: @user.id })
-      render json: @user, jwt: token, status: :accepted
+      @token = get_token
+      @image_url = get_image_url
+      render json: @user, get_token: @token, get_image_url: @image_url
     else
       render json: { message: 'Invalid username or password' }, status: :unauthorized
     end
